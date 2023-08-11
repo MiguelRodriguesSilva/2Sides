@@ -27,6 +27,7 @@ public class CameraController : MonoBehaviour
 
 
 
+
         SistemaColisaoCamera();
     }
 

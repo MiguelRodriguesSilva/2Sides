@@ -36,31 +36,35 @@ public class Player : MonoBehaviour
         }
 
 
-        if (vertical != 0)
+        if (horizontal != 0)
+        {
+            animador.SetBool("estaAndando", true);
+            animador.SetBool("estaVirado", true);
+
+        }
+        else if (vertical != 0)
         {
             if (vertical < 0)
             {
                 animador.SetBool("estaAndando", true);
                 animador.SetBool("estaVirado", false);
             }
-        }
-        else if (horizontal != 0)
-        {
-            animador.SetBool("estaAndando", true);
-            animador.SetBool("estaVirado", true);
+           
         }
         else if (animador.GetBool("estaVirado") == false || vertical == 0 || horizontal == 0)
         {
             animador.SetBool("estaAndando", false);
         }
 
-        if (horizontal > 0)
-        {
-            sr.flipX = true;
-        }
-        else
+        
+
+        if (horizontal <= 0 || animador.GetBool("estaVirado") == false)
         {
             sr.flipX = false;
+        }
+        else if (horizontal > 0)
+        {
+            sr.flipX = true;
         }
 
 

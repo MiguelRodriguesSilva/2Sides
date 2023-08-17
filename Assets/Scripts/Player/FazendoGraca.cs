@@ -7,7 +7,7 @@ public class FazendoGraca : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+     
     }
 
     // Update is called once per frame
@@ -16,8 +16,18 @@ public class FazendoGraca : MonoBehaviour
 
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Oi vagabunda ;w;");
+        if (collision.tag == "Player")
+        {
+            Player player = collision.GetComponent<Player>();
+
+            if (player != null)
+            {
+                Debug.Log("Oi vagabunda ;w;");
+                player.Dano(2);
+            }
+        }
+        
     }
 }

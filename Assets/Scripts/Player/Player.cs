@@ -5,17 +5,23 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float velocidadePlayer;
+    public int vidaPlayer = 3;
     Animator animador;
     SpriteRenderer sr;
 
     // Start is called before the first frame update
     void Start()
     {
+        vidaPlayer = 3;
         animador = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
     void FixedUpdate()
     {
         MovimentacaoPlayer();
@@ -36,25 +42,30 @@ public class Player : MonoBehaviour
         }
 
 
-        if (vertical != 0)
+        if (horizontal != 0)
         {
+            animador.SetBool("estaAndando", true);
+            animador.SetBool("estaVirado", true);
+        }
+        else if (vertical != 0)
+        {
+
             if (vertical < 0)
             {
                 animador.SetBool("estaAndando", true);
                 animador.SetBool("estaVirado", false);
             }
         }
-        else if (horizontal != 0)
-        {
-            animador.SetBool("estaAndando", true);
-            animador.SetBool("estaVirado", true);
-        }
-        else if (animador.GetBool("estaVirado") == false || vertical == 0 || horizontal == 0)
+        else if (vertical == 0 || horizontal == 0)
         {
             animador.SetBool("estaAndando", false);
+            if (animador.GetBool("estaVirado") == true)
+            {
+
+            }
         }
 
-        if (horizontal > 0)
+        if (horizontal > 0 && animador.GetBool("estaVirado") == true)
         {
             sr.flipX = true;
         }
@@ -66,8 +77,21 @@ public class Player : MonoBehaviour
 
     }
 
-    void Animacao()
+    public void Dano(int danoInimigo)
     {
-        
+        vidaPlayer -= danoInimigo;
+
+        if (vidaPlayer < 1)
+        {
+            vidaPlayer = 0;
+            MortePlayer();
+        }
+    }
+
+    void MortePlayer()
+    {
+        Debug.Log("To morto");
     }
 }
+
+

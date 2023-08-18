@@ -5,14 +5,15 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float velocidadePlayer;
-    public int vidaPlayer = 3;
+    public int vidaBasePlayer = 3;
+    public int vidaPlayer;
     Animator animador;
     SpriteRenderer sr;
 
     // Start is called before the first frame update
     void Start()
     {
-        vidaPlayer = 3;
+        vidaPlayer = vidaBasePlayer;
         animador = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
     }
